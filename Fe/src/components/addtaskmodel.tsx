@@ -81,13 +81,13 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({
 
         <div className="flex justify-end gap-2">
           <button
-            className="bg-blue-500 px-4 py-2 rounded-2xl hover:bg-blue-600"
+            className="bg-blue-500 px-4 py-2 rounded-2xl hover:bg-blue-600 hover:cursor-pointer"
             onClick={handleSubmit}
           >
             {editTask ? "Update" : "Add"}
           </button>
           <button
-            className="bg-red-500 px-4 py-2 rounded-2xl hover:bg-red-600"
+            className="bg-red-500 px-4 py-2 rounded-2xl hover:bg-red-600 hover:cursor-pointer"
             onClick={onClose}
           >
             Cancel

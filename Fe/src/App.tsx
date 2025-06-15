@@ -13,7 +13,7 @@ interface Task {
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [editTask, setEditTask] = useState<Task | null>(null); // ✅ For editing
+  const [editTask, setEditTask] = useState<Task | null>(null); 
 
   const fetchTasks = async () => {
     const res = await getTasks();
@@ -47,8 +47,8 @@ function App() {
   };
 
   const handleEditClick = (task: Task) => {
-    setEditTask(task); // ✅ Set current task to edit
-    setShowModal(true); // ✅ Open modal in edit mode
+    setEditTask(task); 
+    setShowModal(true);
   };
 
   const handleUpdateTask = async (updated: Task) => {
@@ -63,7 +63,7 @@ function App() {
       <button
         className="bg-blue-600 px-6 py-2 rounded-2xl hover:bg-blue-700 transition hover:cursor-pointer"
         onClick={() => {
-          setEditTask(null); // ✅ New task mode
+          setEditTask(null); 
           setShowModal(true);
         }}
       >
@@ -77,7 +77,7 @@ function App() {
             task={task}
             onDelete={handleDelete}
             onToggleComplete={handleToggleComplete}
-            onEdit={handleEditClick} // ✅ This triggers modal for edit
+            onEdit={handleEditClick}
           />
         ))}
       </div>
