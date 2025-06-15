@@ -1,4 +1,34 @@
 # TaskFlow
 
-Objective
-Create a simple task management application using React for the frontend and Node.js for the backend. The application should allow users to create, view, update, and delete tasks.
+A simple Task Management application built with **React** (frontend) and **Node.js** (backend).
+
+##  Features
+
+* Create new tasks 
+* View all tasks 
+* Update task details 
+* Delete tasks 
+
+##  Tech Stack
+
+* **Frontend**: React With Typescript
+* **Backend**: Node.js, Express
+* **Data Storage**: in-memory data structure to store tasks [for now]
+
+##  Getting Started
+
+### Backend
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm start
+```
