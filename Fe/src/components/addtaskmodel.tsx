@@ -1,25 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  completed: boolean;
+}
 
 interface AddTaskModalProps {
   onClose: () => void;
   onAdd: (title: string, description: string, completed: boolean) => void;
+  onEdit?: (task: Task) => void;
+  editTask?: Task | null;
 }
 
-const AddTaskModal: React.FC<AddTaskModalProps> = ({ onClose, onAdd }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("false");
+const AddTaskModal: React.FC<AddTaskModalProps> = ({
+  onClose,
+  onAdd,
+  onEdit,
+  editTask,
+}) => {
+  const [title, setTitle] = useState(editTask?.title || "");
+  const [description, setDescription] = useState(editTask?.description || "");
+  const [status, setStatus] = useState(editTask?.completed ? "true" : "false");
+
+  useEffect(() => {
+    if (editTask) {
+      setTitle(editTask.title);
+      setDescription(editTask.description);
+      setStatus(editTask.completed ? "true" : "false");
+    }
+  }, [editTask]);
 
   const handleSubmit = () => {
     if (!title.trim()) return;
-    onAdd(title, description, status === "true");
+
+    if (editTask && onEdit) {
+      onEdit({
+        id: editTask.id,
+        title,
+        description,
+        completed: status === "true",
+      });
+    } else {
+      onAdd(title, description, status === "true");
+    }
+
     onClose();
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-      <div className="border p-6 rounded-xl w-full max-w-md shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-        <h2 className="text-2xl font-semibold mb-4 text-white">Add New Task</h2>
+      <div className="border p-6 rounded-xl w-full max-w-md shadow-[0_0_20px_rgba(255,255,255,0.3)] bg-gray-900">
+        <h2 className="text-2xl font-semibold mb-4 text-white">
+          {editTask ? "Edit Task" : "Add New Task"}
+        </h2>
 
         <input
           type="text"
@@ -49,7 +84,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ onClose, onAdd }) => {
             className="bg-blue-500 px-4 py-2 rounded-2xl hover:bg-blue-600"
             onClick={handleSubmit}
           >
-            Add
+            {editTask ? "Update" : "Add"}
           </button>
           <button
             className="bg-red-500 px-4 py-2 rounded-2xl hover:bg-red-600"
